@@ -20,18 +20,18 @@ end
 
 function M.start()
   vim.cmd([[
-    augroup Session
+    augroup Persistence
       autocmd!
-      autocmd VimLeavePre * lua require("session").save()
-      "autocmd BufEnter * lua require("session").save()
+      autocmd VimLeavePre * lua require("persistence").save()
+      "autocmd BufEnter * lua require("persistence").save()
     augroup end
   ]])
 end
 
 function M.stop()
   vim.cmd([[
-  autocmd! Session
-  augroup! Session
+  autocmd! Persistence
+  augroup! Persistence
   ]])
 end
 
