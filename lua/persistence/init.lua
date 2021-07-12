@@ -1,13 +1,12 @@
+local Config = require("persistence.config")
+
 local M = {}
 
 local e = vim.fn.fnameescape
 
-local sessions_dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/")
-vim.fn.mkdir(sessions_dir, "p")
-
 function M.get_current()
   local name = vim.fn.getcwd():gsub("/", "%%")
-  return sessions_dir .. name .. ".vim"
+  return Config.options.dir .. name .. ".vim"
 end
 
 function M.get_last()
@@ -18,12 +17,16 @@ function M.get_last()
   return sessions[1]
 end
 
+function M.setup(opts)
+  Config.setup(opts)
+  M.start()
+end
+
 function M.start()
   vim.cmd([[
     augroup Persistence
       autocmd!
       autocmd VimLeavePre * lua require("persistence").save()
-      "autocmd BufEnter * lua require("persistence").save()
     augroup end
   ]])
 end
@@ -36,7 +39,10 @@ function M.stop()
 end
 
 function M.save()
+  local tmp = vim.o.sessionoptions
+  vim.o.sessionoptions = table.concat(Config.options.options, ",")
   vim.cmd("mks! " .. e(M.get_current()))
+  vim.o.sessionoptions = tmp
 end
 
 function M.load(opt)
@@ -48,7 +54,7 @@ function M.load(opt)
 end
 
 function M.list()
-  return vim.fn.glob(sessions_dir .. "*.vim", true, true)
+  return vim.fn.glob(Config.options.dir .. "*.vim", true, true)
 end
 
 return M
