@@ -1,6 +1,6 @@
 # 💾 Persistence
 
-**persistence** is a simple lua plugin for automated session management.
+**Persistence** is a simple lua plugin for automated session management.
 
 ## ✨ Features
 
@@ -31,7 +31,7 @@ use({
 
 ## ⚙️ Configuration
 
-Todo comes with the following defaults:
+Persistence comes with the following defaults:
 
 ```lua
 {
