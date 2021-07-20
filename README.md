@@ -21,12 +21,27 @@ Install the plugin with your preferred package manager:
 -- Lua
 use({
   "folke/persistence.nvim",
-  event = "VimEnter",
+  event = "BufReadPre", -- this will only start session saving when an actual file was opened
   module = "persistence",
   config = function()
     require("persistence").setup()
   end,
 })
+```
+
+### [vim-plug](https://github.com/junegunn/vim-plug)
+
+```vim
+" Vim Script
+Plug 'folke/persistence.nvim'
+
+lua << EOF
+  require("persistence").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
 ```
 
 ## ⚙️ Configuration
