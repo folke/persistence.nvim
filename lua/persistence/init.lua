@@ -19,7 +19,9 @@ end
 
 function M.setup(opts)
   Config.setup(opts)
-  M.start()
+  if opts.autosave then
+      M.start()
+  end
 end
 
 function M.start()
