@@ -46,7 +46,7 @@ function M.start()
 end
 
 function M.stop()
-  vim.g.using_persistance = nil
+  vim.g.using_persistence = nil
   vim.cmd([[
     autocmd! Persistence
     augroup! Persistence
@@ -58,14 +58,14 @@ function M.save()
   vim.o.sessionoptions = table.concat(Config.options.options, ",")
   vim.cmd("mks! " .. e(M.get_current()))
   vim.o.sessionoptions = tmp
-  vim.g.using_persistance = e(M.get_current())
+  vim.g.using_persistence = e(M.get_current())
 end
 
 function M.load(opt)
   opt = opt or {}
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
-    vim.g.using_persistance = e(sfile)
+    vim.g.using_persistence = e(sfile)
     vim.cmd("source " .. e(sfile))
   end
 end
