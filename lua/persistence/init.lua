@@ -6,7 +6,21 @@ local e = vim.fn.fnameescape
 
 function M.get_current()
   local name = vim.fn.getcwd():gsub("/", "%%")
-  return Config.options.dir .. name .. ".vim"
+  return Config.options.dir .. name .. M.get_branch() ..".vim"
+end
+
+function M.get_branch()
+  if Config.options.use_git_branch == true then
+    local branch = vim.api.nvim_exec([[!git rev-parse --abbrev-ref HEAD]], true)
+    -- The command returns two lines. We only need the second one
+    lines = {}
+    for s in branch:gmatch("[^\r\n]+") do
+      table.insert(lines, '_' .. s)
+    end
+    return lines[2]:gsub("/", "%%")
+  end
+
+  return ''
 end
 
 function M.get_last()
@@ -33,8 +47,8 @@ end
 
 function M.stop()
   vim.cmd([[
-  autocmd! Persistence
-  augroup! Persistence
+    autocmd! Persistence
+    augroup! Persistence
   ]])
 end
 
