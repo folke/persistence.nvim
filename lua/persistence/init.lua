@@ -43,14 +43,15 @@ function M.start()
       autocmd VimLeavePre * lua require("persistence").save()
     augroup end
   ]])
+  vim.g.using_persistence = true
 end
 
 function M.stop()
-  vim.g.using_persistence = nil
   vim.cmd([[
     autocmd! Persistence
     augroup! Persistence
   ]])
+  vim.g.using_persistence = false
 end
 
 function M.save()
@@ -58,15 +59,15 @@ function M.save()
   vim.o.sessionoptions = table.concat(Config.options.options, ",")
   vim.cmd("mks! " .. e(M.get_current()))
   vim.o.sessionoptions = tmp
-  vim.g.using_persistence = e(M.get_current())
+  vim.g.using_persistence = true
 end
 
 function M.load(opt)
   opt = opt or {}
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
-    vim.g.using_persistence = e(sfile)
     vim.cmd("source " .. e(sfile))
+    vim.g.using_persistence = true
   end
 end
 
