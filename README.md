@@ -6,6 +6,7 @@
 
 - automatically saves the active session under `.config/nvim/sessions` on exit
 - simple API to restore the current or last session
+- make use of sessions per git branch
 
 ## ⚡️ Requirements
 
@@ -51,6 +52,7 @@ Persistence comes with the following defaults:
 ```lua
 {
   dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"), -- directory where session files are saved
+  use_git_branch = false, -- create session files based on the branch of the git enabled repository
   options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
 }
 ```
