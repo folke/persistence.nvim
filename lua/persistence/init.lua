@@ -10,10 +10,13 @@ function M.get_current()
 end
 
 function M.get_branch()
-  if Config.options.use_git_branch == true then
-    local branch = vim.api.nvim_exec([[!git rev-parse --abbrev-ref HEAD]], true)
-    -- The command returns two lines. We only need the second one
-    lines = {}
+  local git_enabled = (vim.fn.isdirectory(vim.fn.getcwd()..'/.git') == 1)
+
+  if Config.options.use_git_branch == true and git_enabled == true then
+    local branch = vim.api.nvim_exec([[!git rev-parse --abbrev-ref HEAD 2>/dev/null]], true)
+
+    -- The branch command returns two lines. We only need the second line
+    local lines = {}
     for s in branch:gmatch("[^\r\n]+") do
       table.insert(lines, '_' .. s)
     end
