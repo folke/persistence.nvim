@@ -5,7 +5,11 @@ local M = {}
 local e = vim.fn.fnameescape
 
 function M.get_current()
-  local name = vim.fn.getcwd():gsub("/", "%%")
+  local pattern = "/"
+  if vim.fn.has("win32") then
+    pattern = '[\\:]'
+  end
+  local name = vim.fn.getcwd():gsub(pattern, "%%")
   return Config.options.dir .. name .. ".vim"
 end
 
