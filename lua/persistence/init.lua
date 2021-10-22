@@ -6,7 +6,7 @@ local e = vim.fn.fnameescape
 
 function M.get_current()
   local pattern = "/"
-  if vim.fn.has("win32") then
+  if vim.fn.has("win32") == 1 then
     pattern = '[\\:]'
   end
   local name = vim.fn.getcwd():gsub(pattern, "%%")
