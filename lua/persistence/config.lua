@@ -4,6 +4,7 @@ local M = {}
 local defaults = {
   dir = vim.fn.expand(vim.fn.stdpath("config") .. "/sessions/"), -- directory where session files are saved
   options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
+  autosave = true, -- automatically save session files
 }
 
 ---@type PersistenceOptions
