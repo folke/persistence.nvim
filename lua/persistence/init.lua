@@ -16,7 +16,7 @@ end
 function M.get_branch()
   local git_enabled = (vim.fn.isdirectory(vim.fn.getcwd()..'/.git') == 1)
 
-  if Config.options.use_git_branch == true and git_enabled == true then
+  if Config.options.use_git_branch and git_enabled then
     local branch = vim.api.nvim_exec([[!git rev-parse --abbrev-ref HEAD 2>/dev/null]], true)
 
     -- The branch command returns two lines. We only need the second line
