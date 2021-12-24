@@ -10,7 +10,7 @@ function M.get_current()
     pattern = '[\\:]'
   end
   local name = vim.fn.getcwd():gsub(pattern, "%%")
-  return Config.options.dir .. name .. ".vim"
+  return Config.options.dir .. name .. M.get_branch() .. ".vim"
 end
 
 function M.get_branch()
