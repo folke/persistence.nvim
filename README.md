@@ -1,12 +1,14 @@
-# 💾 Persistence
+# 💾 Persisted
 
-**Persistence** is a simple lua plugin for automated session management.
+**Persisted** is a simple lua plugin for automated session management within Neovim.
+
+The plugin was forked from the fantastic [Persistence.nvim](https://github.com/folke/persistence.nvim) as active development had paused.
 
 ## ✨ Features
 
-- automatically saves the active session under `.config/nvim/sessions` on exit
-- simple API to restore the current or last session
-- make use of sessions per git branch
+- Automatically saves the active session under `.config/nvim/sessions` on exit
+- Simple API to restore the current or last session
+- Make use of sessions per git branch
 
 ## ⚡️ Requirements
 
@@ -21,11 +23,11 @@ Install the plugin with your preferred package manager:
 ```lua
 -- Lua
 use({
-  "folke/persistence.nvim",
+  "olimorris/persisted.nvim",
   event = "BufReadPre", -- this will only start session saving when an actual file was opened
-  module = "persistence",
+  module = "persisted",
   config = function()
-    require("persistence").setup()
+    require("persisted").setup()
   end,
 })
 ```
@@ -34,10 +36,10 @@ use({
 
 ```vim
 " Vim Script
-Plug 'folke/persistence.nvim'
+Plug 'olimorris/persisted.nvim'
 
 lua << EOF
-  require("persistence").setup {
+  require("persisted").setup {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
@@ -47,7 +49,7 @@ EOF
 
 ## ⚙️ Configuration
 
-Persistence comes with the following defaults:
+Persisted comes with the following defaults:
 
 ```lua
 {
@@ -59,16 +61,16 @@ Persistence comes with the following defaults:
 
 ## 🚀 Usage
 
-**Persistence** works well with plugins like `startify` or `dashboard`. It will never restore a session automatically,
+**Persisted** works well with plugins like `startify` or `dashboard`. It will never restore a session automatically,
 but you can of course write an autocmd that does exactly that if you want.
 
 ```lua
 -- restore the session for the current directory
-vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]])
+vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persisted").load()<cr>]])
 
 -- restore the last session
-vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]])
+vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persisted").load({ last = true })<cr>]])
 
 -- stop Persistence => session won't be saved on exit
-vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]])
+vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persisted").stop()<cr>]])
 ```
