@@ -57,6 +57,13 @@ function M.load(opt)
   end
 end
 
+function M.delete_current()
+  local sfile = M.get_current()
+  if sfile and vim.loop.fs_stat(sfile) ~= 0 then
+    vim.fn.system("rm " .. e(sfile))
+  end
+end
+
 function M.list()
   return vim.fn.glob(Config.options.dir .. "*.vim", true, true)
 end
