@@ -7,7 +7,7 @@ local e = vim.fn.fnameescape
 function M.get_current()
   local pattern = "/"
   if vim.fn.has("win32") == 1 then
-    pattern = '[\\:]'
+    pattern = "[\\:]"
   end
   local name = vim.fn.getcwd():gsub(pattern, "%%")
   return Config.options.dir .. name .. ".vim"
@@ -54,6 +54,14 @@ function M.load(opt)
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
     vim.cmd("source " .. e(sfile))
+  end
+end
+
+function M.delete_current()
+  local sfile = M.get_current()
+  if sfile and vim.loop.fs_stat(sfile) ~= 0 then
+    M.stop()
+    vim.fn.system("rm " .. e(sfile))
   end
 end
 
