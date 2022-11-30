@@ -7,7 +7,7 @@ local e = vim.fn.fnameescape
 function M.get_current()
   local pattern = "/"
   if vim.fn.has("win32") == 1 then
-    pattern = '[\\:]'
+    pattern = "[\\:]"
   end
   local name = vim.fn.getcwd():gsub(pattern, "%%")
   return Config.options.dir .. name .. ".vim"
@@ -53,7 +53,7 @@ function M.load(opt)
   opt = opt or {}
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
-    vim.cmd("source " .. e(sfile))
+    vim.cmd("silent! source " .. e(sfile))
   end
 end
 
