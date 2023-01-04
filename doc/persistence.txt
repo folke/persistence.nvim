@@ -1,4 +1,4 @@
-*persistence.txt*         For NVIM v0.5.0        Last change: 2022 November 30
+*persistence.txt*         For NVIM v0.8.0         Last change: 2023 January 04
 
 ==============================================================================
 Table of Contents                              *persistence-table-of-contents*
