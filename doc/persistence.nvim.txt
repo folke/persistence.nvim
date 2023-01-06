@@ -1,4 +1,4 @@
-*persistence.nvim.txt*     For Neovim >= 0.8.0    Last change: 2023 January 05
+*persistence.nvim.txt*     For Neovim >= 0.8.0    Last change: 2023 January 06
 
 ==============================================================================
 Table of Contents                         *persistence.nvim-table-of-contents*
@@ -25,7 +25,7 @@ FEATURES                                           *persistence.nvim-features*
 REQUIREMENTS                                   *persistence.nvim-requirements*
 
 
-- Neovim >= 0.5.0
+- Neovim >= 0.7.2
 
 
 INSTALLATION                                   *persistence.nvim-installation*
