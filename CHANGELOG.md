@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/folke/persistence.nvim/compare/v1.0.0...v1.0.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* dont throw error when session was already stopped ([70c281e](https://github.com/folke/persistence.nvim/commit/70c281e54e34630d8bef9b1cf9f7a0ac3edd6a1c))
+
 ## 1.0.0 (2023-01-04)
 
 
