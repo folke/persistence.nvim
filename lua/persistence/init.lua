@@ -27,19 +27,16 @@ function M.setup(opts)
 end
 
 function M.start()
-  vim.cmd([[
-    augroup Persistence
-      autocmd!
-      autocmd VimLeavePre * lua require("persistence").save()
-    augroup end
-  ]])
+  vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = vim.api.nvim_create_augroup("persistence", { clear = true }),
+    callback = function()
+      M.save()
+    end,
+  })
 end
 
 function M.stop()
-  vim.cmd([[
-  autocmd! Persistence
-  augroup! Persistence
-  ]])
+  pcall(vim.api.nvim_del_augroup_by_name, "persistence")
 end
 
 function M.save()
