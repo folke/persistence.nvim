@@ -1,4 +1,4 @@
-*persistence.nvim.txt*     For Neovim >= 0.8.0    Last change: 2023 January 06
+*persistence.nvim.txt*     For Neovim >= 0.8.0    Last change: 2023 January 17
 
 ==============================================================================
 Table of Contents                         *persistence.nvim-table-of-contents*
@@ -18,7 +18,7 @@ Table of Contents                         *persistence.nvim-table-of-contents*
 FEATURES                                           *persistence.nvim-features*
 
 
-- automatically saves the active session under `.config/nvim/sessions` on exit
+- automatically saves the active session under `~/.local/state/nvim/sessions` on exit
 - simple API to restore the current or last session
 
 
