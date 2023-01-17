@@ -4,7 +4,7 @@
 
 ## ✨ Features
 
-- automatically saves the active session under `.config/nvim/sessions` on exit
+- automatically saves the active session under `~/.local/state/nvim/sessions` on exit
 - simple API to restore the current or last session
 
 ## ⚡️ Requirements
