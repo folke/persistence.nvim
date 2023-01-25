@@ -30,7 +30,9 @@ function M.start()
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()
-      M.save()
+      if #(vim.fn.getbufinfo({ buflisted = true })) >= Config.options.min_buffers then
+        M.save()
+      end
     end,
   })
 end

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0](https://github.com/folke/persistence.nvim/compare/v1.0.1...v1.1.0) (2023-01-08)
+
+### Features
+
+* added config option to only save session if a minimum number of buffers are open ([96f2418](https://github.com/folke/persistence.nvim/commit/96f2418a8cc774af3eb3d06e0f2e75ca8af6f94e))
+
 ## [1.0.1](https://github.com/folke/persistence.nvim/compare/v1.0.0...v1.0.1) (2023-01-06)
 
 
