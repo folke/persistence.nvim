@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/folke/persistence.nvim/compare/v1.0.1...v1.1.0) (2023-02-28)
+
+
+### Features
+
+* **persistence:** `pre_save` option to call before saving ([#22](https://github.com/folke/persistence.nvim/issues/22)) ([f4bb0c5](https://github.com/folke/persistence.nvim/commit/f4bb0c5641a0e6c9ac3675ddd794ca78099d8510))
+
 ## [1.0.1](https://github.com/folke/persistence.nvim/compare/v1.0.0...v1.0.1) (2023-01-06)
 
 
