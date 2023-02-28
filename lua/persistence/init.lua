@@ -30,6 +30,10 @@ function M.start()
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()
+      if Config.options.pre_save then
+        Config.options.pre_save()
+      end
+
       M.save()
     end,
   })
