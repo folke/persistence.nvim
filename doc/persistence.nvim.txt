@@ -1,4 +1,4 @@
-*persistence.nvim.txt*      For Neovim >= 0.8.0     Last change: 2023 March 19
+*persistence.nvim.txt*       For Neovim >= 0.8.0      Last change: 2023 May 22
 
 ==============================================================================
 Table of Contents                         *persistence.nvim-table-of-contents*
@@ -18,13 +18,11 @@ Table of Contents                         *persistence.nvim-table-of-contents*
 
 FEATURES                               *persistence.nvim-persistence-features*
 
-
 - automatically saves the active session under `~/.local/state/nvim/sessions` on exit
 - simple API to restore the current or last session
 
 
 REQUIREMENTS                       *persistence.nvim-persistence-requirements*
-
 
 - Neovim >= 0.7.2
 
@@ -34,34 +32,17 @@ INSTALLATION                       *persistence.nvim-persistence-installation*
 Install the plugin with your preferred package manager:
 
 
-PACKER ~
+FOLKE ~
 
 >lua
     -- Lua
-    use({
+    {
       "folke/persistence.nvim",
       event = "BufReadPre", -- this will only start session saving when an actual file was opened
-      module = "persistence",
-      config = function()
-        require("persistence").setup()
-      end,
-    })
-<
-
-
-VIM-PLUG ~
-
->vim
-    " Vim Script
-    Plug 'folke/persistence.nvim'
-    
-    lua << EOF
-      require("persistence").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
+      opts = {
+        -- add any custom options here
       }
-    EOF
+    }
 <
 
 
