@@ -21,9 +21,14 @@ function M.get_last()
   return sessions[1]
 end
 
+function M.config()
+  return Config.options
+end
+
 function M.setup(opts)
+  M.running = false
   Config.setup(opts)
-  M.start()
+  if opts.auto_start then M.start() end
 end
 
 function M.start()
@@ -37,10 +42,12 @@ function M.start()
       M.save()
     end,
   })
+  M.running = true
 end
 
 function M.stop()
   pcall(vim.api.nvim_del_augroup_by_name, "persistence")
+  M.running = false
 end
 
 function M.save()
@@ -55,6 +62,7 @@ function M.load(opt)
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
     vim.cmd("silent! source " .. e(sfile))
+    M.running = true
   end
 end
 
