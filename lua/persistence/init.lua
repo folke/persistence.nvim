@@ -21,8 +21,8 @@ function M.get_last()
   return sessions[1]
 end
 
-function M.config()
-  return Config.options
+function M.has_session()
+  return vim.fn.filereadable( M.get_current() ) == 1
 end
 
 function M.setup(opts)
