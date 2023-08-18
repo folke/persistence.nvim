@@ -62,7 +62,7 @@ function M.load(opt)
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
     vim.cmd("silent! source " .. e(sfile))
-    M.running = true
+    if not M.running then M.start() end
   end
 end
 
