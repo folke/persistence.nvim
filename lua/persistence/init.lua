@@ -4,6 +4,10 @@ local M = {}
 
 local e = vim.fn.fnameescape
 
+function M.session_available()
+  return vim.fn.filereadable(M.get_current()) == 1
+end
+
 function M.get_current()
   local pattern = "/"
   if vim.fn.has("win32") == 1 then
