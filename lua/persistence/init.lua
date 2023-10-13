@@ -34,6 +34,18 @@ function M.start()
         Config.options.pre_save()
       end
 
+      if not Config.options.save_empty then
+        local bufs = vim.tbl_filter(function(b)
+          if vim.bo[b].buftype ~= "" then
+            return false
+          end
+          return vim.api.nvim_buf_get_name(b) ~= ""
+        end, vim.api.nvim_list_bufs())
+        if #bufs == 0 then
+          return
+        end
+      end
+
       M.save()
     end,
   })
