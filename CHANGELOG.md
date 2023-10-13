@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/folke/persistence.nvim/compare/v1.2.0...v1.2.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* dont save the session when only `gitcommit` buffers are present. Fixes [#14](https://github.com/folke/persistence.nvim/issues/14) ([8f7cbcc](https://github.com/folke/persistence.nvim/commit/8f7cbccfb506fe6cb35db9ad966137c363b049c5))
+
 ## [1.2.0](https://github.com/folke/persistence.nvim/compare/v1.1.0...v1.2.0) (2023-10-13)
 
 
