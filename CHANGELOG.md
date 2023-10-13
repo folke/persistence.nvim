@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/folke/persistence.nvim/compare/v1.1.0...v1.2.0) (2023-10-13)
+
+
+### Features
+
+* don't save the session when no files are open (save_empty = false) ([e9afeaf](https://github.com/folke/persistence.nvim/commit/e9afeaf3a7bb645ca73980cd13048c48c292500c))
+
 ## [1.1.0](https://github.com/folke/persistence.nvim/compare/v1.0.1...v1.1.0) (2023-02-28)
 
 
