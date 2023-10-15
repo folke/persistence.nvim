@@ -1,6 +1,8 @@
 local Config = require("persistence.config")
 
 local M = {}
+---@type string?
+M.current = nil
 
 local e = vim.fn.fnameescape
 
@@ -27,6 +29,7 @@ function M.setup(opts)
 end
 
 function M.start()
+  M.current = M.get_current()
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()
@@ -55,13 +58,14 @@ function M.start()
 end
 
 function M.stop()
+  M.current = nil
   pcall(vim.api.nvim_del_augroup_by_name, "persistence")
 end
 
 function M.save()
   local tmp = vim.o.sessionoptions
   vim.o.sessionoptions = table.concat(Config.options.options, ",")
-  vim.cmd("mks! " .. e(M.get_current()))
+  vim.cmd("mks! " .. e(M.current or M.get_current()))
   vim.o.sessionoptions = tmp
 end
 
