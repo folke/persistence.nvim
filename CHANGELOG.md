@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/folke/persistence.nvim/compare/v1.2.1...v2.0.0) (2023-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **start:** session name is now based on the cwd when the session starts and not when the session ends. Fixes #1688
+
+### Bug Fixes
+
+* **start:** session name is now based on the cwd when the session starts and not when the session ends. Fixes [#1688](https://github.com/folke/persistence.nvim/issues/1688) ([0361df7](https://github.com/folke/persistence.nvim/commit/0361df7775f5b4ed51a6d7fe159438573b7f07a6))
+
 ## [1.2.1](https://github.com/folke/persistence.nvim/compare/v1.2.0...v1.2.1) (2023-10-13)
 
 
