@@ -45,6 +45,9 @@ function M.start()
           if vim.bo[b].filetype == "gitcommit" then
             return false
           end
+          if vim.bo[b].filetype == "gitrebase" then
+            return false
+          end
           return vim.api.nvim_buf_get_name(b) ~= ""
         end, vim.api.nvim_list_bufs())
         if #bufs == 0 then
