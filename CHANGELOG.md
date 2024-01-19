@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/folke/persistence.nvim/compare/v2.0.0...v2.0.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* don't save `gitrebase` session ([#44](https://github.com/folke/persistence.nvim/issues/44)) ([9dbe264](https://github.com/folke/persistence.nvim/commit/9dbe2648c67b678bf7fe688f03b57a2514e03e6f))
+
 ## [2.0.0](https://github.com/folke/persistence.nvim/compare/v1.2.1...v2.0.0) (2023-10-15)
 
 
