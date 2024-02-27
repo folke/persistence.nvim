@@ -29,7 +29,9 @@ function M.setup(opts)
 end
 
 function M.start()
-  M.current = M.get_current()
+  if Config.options.capture_startup_directory then
+    M.current = M.get_current()
+  end
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()

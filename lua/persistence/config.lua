@@ -6,6 +6,7 @@ local defaults = {
   dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
   options = { "buffers", "curdir", "tabpages", "winsize", "skiprtp" }, -- sessionoptions used for saving
   save_empty = false, -- don't save if there are no open file buffers
+  capture_startup_directory = true, -- use directory which was current at start() call
 }
 
 ---@type PersistenceOptions
