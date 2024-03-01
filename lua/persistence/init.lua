@@ -56,6 +56,10 @@ function M.start()
       end
 
       M.save()
+
+      if type(Config.options.post_save) == "function" then
+        Config.options.post_save()
+      end
     end,
   })
 end
@@ -76,7 +80,15 @@ function M.load(opt)
   opt = opt or {}
   local sfile = opt.last and M.get_last() or M.get_current()
   if sfile and vim.fn.filereadable(sfile) ~= 0 then
+    if type(Config.options.pre_load) == "function" then
+      Config.options.pre_load()
+    end
+
     vim.cmd("silent! source " .. e(sfile))
+
+    if type(Config.options.post_load) == "function" then
+      Config.options.post_load()
+    end
   end
 end
 
