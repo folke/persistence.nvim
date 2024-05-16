@@ -2,6 +2,9 @@ local M = {}
 
 ---@class PersistenceOptions
 ---@field pre_save? fun()
+---@field post_save? fun()
+---@field pre_load? fun()
+---@field post_load? fun()
 local defaults = {
   dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
   options = { "buffers", "curdir", "tabpages", "winsize", "skiprtp" }, -- sessionoptions used for saving
