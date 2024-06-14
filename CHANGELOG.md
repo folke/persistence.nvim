@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/folke/persistence.nvim/compare/v2.0.0...v2.1.0) (2024-06-12)
+
+
+### Features
+
+* **persistence:** add `pre-` and `post-` load hooks ([#24](https://github.com/folke/persistence.nvim/issues/24)) ([3d443bd](https://github.com/folke/persistence.nvim/commit/3d443bd0a7e1d9eebfa37321fc8118d8d538af13))
+
+
+### Bug Fixes
+
+* don't save `gitrebase` session ([#44](https://github.com/folke/persistence.nvim/issues/44)) ([9dbe264](https://github.com/folke/persistence.nvim/commit/9dbe2648c67b678bf7fe688f03b57a2514e03e6f))
+* remove expand() as stdpath() expands itself ([#50](https://github.com/folke/persistence.nvim/issues/50)) ([a2fd3d9](https://github.com/folke/persistence.nvim/commit/a2fd3d99656ac496e56233aa4a40dd045a16fdc4))
+
 ## [2.0.0](https://github.com/folke/persistence.nvim/compare/v1.2.1...v2.0.0) (2023-10-15)
 
 
