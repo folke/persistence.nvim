@@ -35,16 +35,14 @@ function M.start()
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()
       M.fire("SavePre")
-      if not Config.options.save_empty then
+      if Config.options.need > 0 then
         local bufs = vim.tbl_filter(function(b)
           if vim.bo[b].buftype ~= "" or vim.bo[b].filetype == "gitcommit" or vim.bo[b].filetype == "gitrebase" then
             return false
           end
           return vim.api.nvim_buf_get_name(b) ~= ""
         end, vim.api.nvim_list_bufs())
-        if #bufs == 0 then
-          return
-        end
+        return #bufs >= Config.options.need
       end
 
       M.save()
