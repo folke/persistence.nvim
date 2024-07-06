@@ -1,5 +1,31 @@
 # Changelog
 
+## [3.0.0](https://github.com/folke/persistence.nvim/compare/v2.0.0...v3.0.0) (2024-07-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* opts.need specifieds how many buffers should be open for saving. Replaces save_empty. Closes #19
+* removed load_pre/load_post/save_pre/save_post in favor of events. Check the readme
+* removed `opts.options`. Use `vim.o.sessionoptions` instead.
+
+### Features
+
+* added `require("persistence").select()` to select a session to load ([5346b53](https://github.com/folke/persistence.nvim/commit/5346b5346a2dd1732ae84f05251ecb704f35df87))
+* opts.need specifieds how many buffers should be open for saving. Replaces save_empty. Closes [#19](https://github.com/folke/persistence.nvim/issues/19) ([7bb5755](https://github.com/folke/persistence.nvim/commit/7bb575517cebbc2b172caa04581dc5d91be90136))
+* persistence.active. Check if a session saving is active ([f0ac0e9](https://github.com/folke/persistence.nvim/commit/f0ac0e981e4c864df11e613636a23c5bad09376d))
+* **persistence:** add `pre-` and `post-` load hooks ([#24](https://github.com/folke/persistence.nvim/issues/24)) ([3d443bd](https://github.com/folke/persistence.nvim/commit/3d443bd0a7e1d9eebfa37321fc8118d8d538af13))
+* removed `opts.options`. Use `vim.o.sessionoptions` instead. ([eb5622e](https://github.com/folke/persistence.nvim/commit/eb5622edae69ec65f6f83fcdd0eb5a70ce48ece7))
+* removed load_pre/load_post/save_pre/save_post in favor of events. Check the readme ([f58a838](https://github.com/folke/persistence.nvim/commit/f58a838282dac1ed33165a5fd03829b036584df2))
+* sessions per branch. Closes [#9](https://github.com/folke/persistence.nvim/issues/9) ([cd0054e](https://github.com/folke/persistence.nvim/commit/cd0054e6a4c17e4068a3e69a030013d268e569f9))
+
+
+### Bug Fixes
+
+* don't save `gitrebase` session ([#44](https://github.com/folke/persistence.nvim/issues/44)) ([9dbe264](https://github.com/folke/persistence.nvim/commit/9dbe2648c67b678bf7fe688f03b57a2514e03e6f))
+* opts.need ([9c0e522](https://github.com/folke/persistence.nvim/commit/9c0e5227fa7b36208a2db0d812008965c1aac889))
+* remove expand() as stdpath() expands itself ([#50](https://github.com/folke/persistence.nvim/issues/50)) ([a2fd3d9](https://github.com/folke/persistence.nvim/commit/a2fd3d99656ac496e56233aa4a40dd045a16fdc4))
+
 ## [2.0.0](https://github.com/folke/persistence.nvim/compare/v1.2.1...v2.0.0) (2023-10-15)
 
 
