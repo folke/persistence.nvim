@@ -12,4 +12,3 @@ jobs:
     with:
       plugin: persistence.nvim
       repo: folke/persistence.nvim
-      tests: false
