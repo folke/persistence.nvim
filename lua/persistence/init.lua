@@ -120,7 +120,10 @@ end
 --- get current branch name
 ---@return string?
 function M.branch()
-  return vim.fn.systemlist("git branch --show-current")[1]
+  if uv.fs_stat(".git") then
+    local ret = vim.fn.systemlist("git branch --show-current")[1]
+    return vim.v.shell_error == 0 and ret or nil
+  end
 end
 
 return M
