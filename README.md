@@ -35,7 +35,10 @@ Persistence comes with the following defaults:
 ```lua
 {
   dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
-  save_empty = false, -- don't save if there are no open file buffers
+  -- minimum number of file buffers that need to be open to save
+  -- Set to 0 to always save
+  need = 1,
+  branch = true, -- use git branch to save session
 }
 ```
 

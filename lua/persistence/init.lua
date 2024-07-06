@@ -10,6 +10,12 @@ local e = vim.fn.fnameescape
 
 function M.current()
   local name = vim.fn.getcwd():gsub("[\\/:]", "%%")
+  if Config.options.branch then
+    local branch = M.branch()
+    if branch and branch ~= "main" and branch ~= "master" then
+      name = name .. "-" .. branch
+    end
+  end
   return Config.options.dir .. name .. ".vim"
 end
 
@@ -109,6 +115,12 @@ function M.select()
       M.load({ file = item.session })
     end
   end)
+end
+
+--- get current branch name
+---@return string?
+function M.branch()
+  return vim.fn.systemlist("git branch --show-current")[1]
 end
 
 return M
