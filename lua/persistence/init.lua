@@ -84,4 +84,25 @@ function M.last()
   return M.list()[1]
 end
 
+function M.select()
+  ---@type { session: string, dir: string }[]
+  local items = {}
+  for _, session in ipairs(M.list()) do
+    if uv.fs_stat(session) then
+      local dir = session:sub(#Config.options.dir + 1, -5):gsub("%%", "/")
+      items[#items + 1] = { session = session, dir = dir }
+    end
+  end
+  vim.ui.select(items, {
+    prompt = "Select a session: ",
+    format_item = function(item)
+      return vim.fn.fnamemodify(item.dir, ":p:~")
+    end,
+  }, function(item)
+    if item then
+      M.load({ file = item.session })
+    end
+  end)
+end
+
 return M

@@ -35,14 +35,12 @@ Persistence comes with the following defaults:
 ```lua
 {
   dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
-  options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
-  pre_save = nil, -- a function to call before saving the session
-  post_save = nil, -- a function to call after saving the session
   save_empty = false, -- don't save if there are no open file buffers
-  pre_load = nil, -- a function to call before loading the session
-  post_load = nil, -- a function to call after loading the session
 }
 ```
+
+> [!TIP]
+> To configure what should be saved in your session, check [:h 'sessionoptions'](https://neovim.io/doc/user/options.html#'sessionoptions')
 
 ## 🚀 Usage
 
@@ -50,12 +48,22 @@ Persistence comes with the following defaults:
 but you can of course write an autocmd that does exactly that if you want.
 
 ```lua
--- restore the session for the current directory
-vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})
+-- load the session for the current directory
+vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
 
--- restore the last session
-vim.api.nvim_set_keymap("n", "<leader>ql", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
+-- select a session to load
+vim.keymap.set("n", "<leader>qS", function() require("persistence").select() end)
+
+-- load the last session
+vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end)
 
 -- stop Persistence => session won't be saved on exit
-vim.api.nvim_set_keymap("n", "<leader>qd", [[<cmd>lua require("persistence").stop()<cr>]], {})
+vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end)
 ```
+
+## 📅 Events
+
+- **PersistenceLoadPre**: before loading a session
+- **PersistenceLoadPost**: after loading a session
+- **PersistenceSavePre**: before saving a session
+- **PersistenceSavePost**: after saving a session
