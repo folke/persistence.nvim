@@ -24,6 +24,11 @@ function M.fire(event)
   })
 end
 
+-- Check if a session is active
+function M.active()
+  return M._current ~= nil
+end
+
 function M.start()
   M._current = M.current()
   vim.api.nvim_create_autocmd("VimLeavePre", {
