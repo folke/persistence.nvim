@@ -70,10 +70,7 @@ function M.stop()
 end
 
 function M.save()
-  local tmp = vim.o.sessionoptions
-  vim.o.sessionoptions = table.concat(Config.options.options, ",")
-  vim.cmd("mks! " .. e(M.current or M.get_current()))
-  vim.o.sessionoptions = tmp
+  vim.cmd("mks! " .. e(M._current or M.current()))
 end
 
 function M.load(opt)
