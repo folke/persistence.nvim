@@ -3,17 +3,16 @@ local Config = require("persistence.config")
 local uv = vim.uv or vim.loop
 
 local M = {}
----@type string?
-M._current = nil
+M._active = false
 
 local e = vim.fn.fnameescape
 
 function M.current()
-  local name = vim.fn.getcwd():gsub("[\\/:]", "%%")
+  local name = vim.fn.getcwd():gsub("[\\/:]+", "%%")
   if Config.options.branch then
     local branch = M.branch()
     if branch and branch ~= "main" and branch ~= "master" then
-      name = name .. "-" .. branch
+      name = name .. "%%" .. branch:gsub("[\\/:]+", "%%")
     end
   end
   return Config.options.dir .. name .. ".vim"
@@ -32,11 +31,11 @@ end
 
 -- Check if a session is active
 function M.active()
-  return M._current ~= nil
+  return M._active
 end
 
 function M.start()
-  M._current = M.current()
+  M._active = true
   vim.api.nvim_create_autocmd("VimLeavePre", {
     group = vim.api.nvim_create_augroup("persistence", { clear = true }),
     callback = function()
@@ -61,25 +60,22 @@ function M.start()
 end
 
 function M.stop()
-  M._current = nil
+  M._active = false
   pcall(vim.api.nvim_del_augroup_by_name, "persistence")
 end
 
 function M.save()
-  vim.cmd("mks! " .. e(M._current or M.current()))
+  vim.cmd("mks! " .. e(M.current()))
 end
 
----@param opts? { last?: boolean, file?: string }
+---@param opts? { last?: boolean }
 function M.load(opts)
   opts = opts or {}
-  local file = opts.file or opts.last and M.last() or M.current()
+  local file = opts.last and M.last() or M.current()
   if file and vim.fn.filereadable(file) ~= 0 then
     M.fire("LoadPre")
     vim.cmd("silent! source " .. e(file))
     M.fire("LoadPost")
-    if M._current then
-      M.start()
-    end
   end
 end
 
@@ -97,12 +93,18 @@ function M.last()
 end
 
 function M.select()
-  ---@type { session: string, dir: string }[]
+  ---@type { session: string, dir: string, branch?: string }[]
   local items = {}
+  local have = {} ---@type table<string, boolean>
   for _, session in ipairs(M.list()) do
     if uv.fs_stat(session) then
-      local dir = session:sub(#Config.options.dir + 1, -5):gsub("%%", "/")
-      items[#items + 1] = { session = session, dir = dir }
+      local file = session:sub(#Config.options.dir + 1, -5)
+      local dir, branch = unpack(vim.split(file, "%%", { plain = true }))
+      dir = dir:gsub("%%", "/")
+      if not have[dir] then
+        have[dir] = true
+        items[#items + 1] = { session = session, dir = dir, branch = branch }
+      end
     end
   end
   vim.ui.select(items, {
@@ -112,7 +114,8 @@ function M.select()
     end,
   }, function(item)
     if item then
-      M.load({ file = item.session })
+      vim.fn.chdir(item.dir)
+      M.load()
     end
   end)
 end
