@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/folke/persistence.nvim/compare/v3.0.1...v3.1.0) (2024-07-07)
+
+
+### Features
+
+* **load:** fallback to regular session when branch session does not exist (yet) ([a93748a](https://github.com/folke/persistence.nvim/commit/a93748acdb2e7bc4389b3738b4c787b764c3b2a6))
+
 ## [3.0.1](https://github.com/folke/persistence.nvim/compare/v3.0.0...v3.0.1) (2024-07-07)
 
 
