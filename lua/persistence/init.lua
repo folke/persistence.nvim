@@ -101,6 +101,9 @@ function M.select()
       local file = session:sub(#Config.options.dir + 1, -5)
       local dir, branch = unpack(vim.split(file, "%%", { plain = true }))
       dir = dir:gsub("%%", "/")
+      if jit.os:find("Windows") then
+        dir = dir:gsub("^(%w)/", "%1:/")
+      end
       if not have[dir] then
         have[dir] = true
         items[#items + 1] = { session = session, dir = dir, branch = branch }
