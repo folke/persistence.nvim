@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.1](https://github.com/folke/persistence.nvim/compare/v3.0.0...v3.0.1) (2024-07-07)
+
+
+### Bug Fixes
+
+* branch detection. Closes [#62](https://github.com/folke/persistence.nvim/issues/62) ([a1d37fa](https://github.com/folke/persistence.nvim/commit/a1d37fa32ef9431f6a57c217ba5c456d20834679))
+* **branch:** escape branch name. Fixes [#65](https://github.com/folke/persistence.nvim/issues/65) ([1565ca0](https://github.com/folke/persistence.nvim/commit/1565ca0af2d93ee94335c2950d92bc133c90aa82))
+* windows ([2d83b1a](https://github.com/folke/persistence.nvim/commit/2d83b1a5c3fe5b2251866f5263fb9607db8d64c0))
+
 ## [3.0.0](https://github.com/folke/persistence.nvim/compare/v2.0.0...v3.0.0) (2024-07-06)
 
 
