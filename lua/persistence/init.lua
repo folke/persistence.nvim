@@ -7,9 +7,11 @@ M._active = false
 
 local e = vim.fn.fnameescape
 
-function M.current()
+---@param opts? {branch?: boolean}
+function M.current(opts)
+  opts = opts or {}
   local name = vim.fn.getcwd():gsub("[\\/:]+", "%%")
-  if Config.options.branch then
+  if Config.options.branch and opts.branch ~= false then
     local branch = M.branch()
     if branch and branch ~= "main" and branch ~= "master" then
       name = name .. "%%" .. branch:gsub("[\\/:]+", "%%")
@@ -71,7 +73,16 @@ end
 ---@param opts? { last?: boolean }
 function M.load(opts)
   opts = opts or {}
-  local file = opts.last and M.last() or M.current()
+  ---@type string
+  local file
+  if opts.last then
+    file = M.last()
+  else
+    file = M.current()
+    if vim.fn.filereadable(file) == 0 then
+      file = M.current({ branch = false })
+    end
+  end
   if file and vim.fn.filereadable(file) ~= 0 then
     M.fire("LoadPre")
     vim.cmd("silent! source " .. e(file))
