@@ -1,4 +1,4 @@
-*persistence.nvim.txt*           For Neovim          Last change: 2024 July 07
+*persistence.nvim.txt*           For Neovim          Last change: 2024 July 13
 
 ==============================================================================
 Table of Contents                         *persistence.nvim-table-of-contents*
