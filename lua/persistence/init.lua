@@ -103,6 +103,15 @@ function M.last()
   return M.list()[1]
 end
 
+local function file_exists(path)
+  local ok, err, code = os.rename(path, path)
+  if code == 13 then
+    -- code 13 means permission denied, which is fine because it exists
+    return true
+  end
+  return ok
+end
+
 function M.select()
   ---@type { session: string, dir: string, branch?: string }[]
   local items = {}
@@ -128,6 +137,17 @@ function M.select()
     end,
   }, function(item)
     if item then
+      local exist = file_exists(item.dir)
+      if not exist then
+        local confirm_code = vim.fn.confirm("Directory does not exist.\nWould you like to delete this session?", "&Yes\n&No")
+        if confirm_code == 0 or confirm_code == 2 then
+          return
+        end
+        if confirm_code == 1 then
+          vim.fn.delete(item.session)
+          return
+        end
+      end
       vim.fn.chdir(item.dir)
       M.load()
     end
