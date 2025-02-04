@@ -92,7 +92,17 @@ end
 
 ---@return string[]
 function M.list()
-  local sessions = vim.fn.glob(Config.options.dir .. "*.vim", true, true)
+  local all_sessions = vim.fn.glob(Config.options.dir .. "*.vim", true, true)
+  local sessions = vim.tbl_filter(function(file)
+    local filename = vim.fn.fnamemodify(file, ":t")
+    if filename:match("x.vim$") then
+      local base_session = file:sub(1, -5) .. ".vim"
+      if vim.fn.filereadable(base_session) == 1 then
+        return false
+      end
+    end
+    return true
+  end, all_sessions)
   table.sort(sessions, function(a, b)
     return uv.fs_stat(a).mtime.sec > uv.fs_stat(b).mtime.sec
   end)
