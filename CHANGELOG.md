@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/folke/persistence.nvim/compare/v3.1.0...v3.1.1) (2025-02-25)
+
+
+### Bug Fixes
+
+* **start:** don't count ft=jj buffers for persistence ([#90](https://github.com/folke/persistence.nvim/issues/90)) ([ae0d7e8](https://github.com/folke/persistence.nvim/commit/ae0d7e8e455d2ec043dc584e09301e1b4fcc42b6))
+
 ## [3.1.0](https://github.com/folke/persistence.nvim/compare/v3.0.1...v3.1.0) (2024-07-07)
 
 
