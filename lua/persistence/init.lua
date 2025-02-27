@@ -45,7 +45,7 @@ function M.start()
 
       if Config.options.need > 0 then
         local bufs = vim.tbl_filter(function(b)
-          if vim.bo[b].buftype ~= "" or vim.bo[b].filetype == "gitcommit" or vim.bo[b].filetype == "gitrebase" then
+          if vim.bo[b].buftype ~= "" or vim.tbl_contains({ "gitcommit", "gitrebase", "jj" }, vim.bo[b].filetype) then
             return false
           end
           return vim.api.nvim_buf_get_name(b) ~= ""
