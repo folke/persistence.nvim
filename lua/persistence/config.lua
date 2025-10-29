@@ -6,7 +6,12 @@ local defaults = {
   -- minimum number of file buffers that need to be open to save
   -- Set to 0 to always save
   need = 1,
-  branch = true, -- use git branch to save session
+
+  -- use git branch to save session (true, false, or "any")
+  -- false: single session per directory, not branch-specific
+  -- true (default): branch-specific session, won't fall back to other branches
+  -- "any": branch-specific session, falls back to any other branch
+  branch = true,
 }
 
 ---@type Persistence.Config

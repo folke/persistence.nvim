@@ -73,7 +73,7 @@ end
 ---@param opts? { last?: boolean }
 function M.load(opts)
   opts = opts or {}
-  ---@type string
+  ---@type string?
   local file
   if opts.last then
     file = M.last()
@@ -81,6 +81,9 @@ function M.load(opts)
     file = M.current()
     if vim.fn.filereadable(file) == 0 then
       file = M.current({ branch = false })
+      if vim.fn.filereadable(file) == 0 and Config.options.branch == "any" then
+        file = M.find_any_branch_session()
+      end
     end
   end
   if file and vim.fn.filereadable(file) ~= 0 then
@@ -132,6 +135,29 @@ function M.select()
       M.load()
     end
   end)
+end
+
+---@return string?
+function M.find_any_branch_session()
+  local cwd_name = vim.fn.getcwd():gsub("[\\/:]+", "%%")
+  local pattern = Config.options.dir .. cwd_name .. "%%*.vim"
+  local candidates = vim.fn.glob(pattern, true, true)
+
+  if #candidates == 0 then
+    return nil
+  end
+
+  -- Sort by modification time (most recent first)
+  table.sort(candidates, function(a, b)
+    local stat_a = uv.fs_stat(a)
+    local stat_b = uv.fs_stat(b)
+    if not stat_a or not stat_b then
+      return false
+    end
+    return stat_a.mtime.sec > stat_b.mtime.sec
+  end)
+
+  return candidates[1]
 end
 
 --- get current branch name
