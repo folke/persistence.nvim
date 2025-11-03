@@ -7,6 +7,7 @@ local defaults = {
   -- Set to 0 to always save
   need = 1,
   branch = true, -- use git branch to save session
+  skip_on_args = false, -- skip saving session if arguments are passed
 }
 
 ---@type Persistence.Config

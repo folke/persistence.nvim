@@ -55,6 +55,15 @@ function M.start()
         end
       end
 
+      if Config.options.skip_on_args then
+        local args = vim.fn.argv()
+        if type(args) == "table" and next(args) ~= nil then
+          return
+        elseif type(args) == "string" and args ~= "" then
+          return
+        end
+      end
+
       M.save()
       M.fire("SavePost")
     end,
