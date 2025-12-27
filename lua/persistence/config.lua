@@ -7,6 +7,7 @@ local defaults = {
   -- Set to 0 to always save
   need = 1,
   branch = true, -- use git branch to save session
+  save_when = function() return true end, -- only save session if user defined function returns true
 }
 
 ---@type Persistence.Config
