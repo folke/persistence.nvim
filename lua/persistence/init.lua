@@ -7,6 +7,12 @@ M._active = false
 
 local e = vim.fn.fnameescape
 
+---@param file_path string
+---@return boolean
+local file_exists = function(file_path)
+  return uv.fs_stat(file_path) and true or false
+end
+
 ---@param opts? {branch?: boolean}
 function M.current(opts)
   opts = opts or {}
@@ -103,7 +109,8 @@ function M.last()
   return M.list()[1]
 end
 
-function M.select()
+---@param opts { prompt: string, handler: function}
+function M.handle_selected(opts)
   ---@type { session: string, dir: string, branch?: string }[]
   local items = {}
   local have = {} ---@type table<string, boolean>
@@ -115,23 +122,44 @@ function M.select()
       if jit.os:find("Windows") then
         dir = dir:gsub("^(%w)/", "%1:/")
       end
-      if not have[dir] then
+      if (not have[dir]) and file_exists(dir) then
         have[dir] = true
         items[#items + 1] = { session = session, dir = dir, branch = branch }
       end
     end
   end
   vim.ui.select(items, {
-    prompt = "Select a session: ",
+    prompt = opts.prompt,
     format_item = function(item)
       return vim.fn.fnamemodify(item.dir, ":p:~")
     end,
   }, function(item)
     if item then
-      vim.fn.chdir(item.dir)
-      M.load()
+      opts.handler(item)
     end
   end)
+end
+
+-- select a session to load
+function M.select()
+  M.handle_selected({
+    prompt = "Select a session: ",
+    handler = function(item)
+      vim.fn.chdir(item.dir)
+      M.load()
+    end,
+  })
+end
+
+-- select a session to delete
+function M.delete()
+  M.handle_selected({
+    prompt = "Delete a session: ",
+    handler = function(item)
+      os.remove(item.session)
+      print("Deleted " .. item.session)
+    end,
+  })
 end
 
 --- get current branch name
