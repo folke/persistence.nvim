@@ -1,4 +1,6 @@
 local Config = require("persistence.config")
+local manage = require("persistence.manage")
+local ops = require("persistence.ops")
 
 local uv = vim.uv or vim.loop
 
@@ -137,10 +139,12 @@ end
 --- get current branch name
 ---@return string?
 function M.branch()
-  if uv.fs_stat(".git") then
-    local ret = vim.fn.systemlist("git branch --show-current")[1]
-    return vim.v.shell_error == 0 and ret or nil
-  end
+  return ops.git_branch()
+end
+
+--- open manage sessions popup
+function M.open_manage()
+  manage.open(M.list())
 end
 
 return M
